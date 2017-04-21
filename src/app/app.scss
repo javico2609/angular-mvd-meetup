@@ -1,0 +1,214 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+/*
+    App Wide Fonts and various weights
+*/
+
+@font-face {
+    font-family: "Varela Round";
+    src: url("../assets/fonts/VarelaRound-Regular.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: "Arimo";
+    src: url("../assets/fonts/Arimo-Regular.ttf") format('truetype');
+}
+
+
+.primary-font {
+  font-family: "Varela Round";
+  &.covers-children * {
+    font-family: "Varela Round";
+  }
+  &.bold-weight {
+    // font-family: "Varela Bold";
+  }
+  &.light-weight {
+    // No light defined for Varela
+  }
+  &.semi-bold {
+    // No semi bold fo Varela
+  }
+}
+
+.secondary-font {
+  font-family: "Arimo";
+  &.covers-children * {
+    font-family: "Arimo";
+  }
+  &.bold-weight {
+    // font-family: "Varela Bold";
+  }
+  &.light-weight {
+    // No light defined for Varela
+  }
+  &.semi-bold {
+    // No semi bold fo Varela
+  }
+}
+
+ion-header {
+   background-color: #1e222d !important;
+}
+
+.bold {font-weight:bold;}
+.text-right {text-align: right;}
+.text-left {text-align: left;}
+.text-center {text-align: center;}
+.uppercase {text-transform:uppercase;}
+.no-margin {margin:0;}
+.text-ellipsis {
+	text-overflow: ellipsis;
+}
+.no-underline {text-decoration: none;}
+
+    .semi-transparent {
+    color : transparentize(white, 0.5) !important;
+  }
+  // @extend .primary-font;
+  ion-content .scroll-content {
+    &.content-ios, &.content-md {
+      background-color: #1e222d !important;
+    }
+  }
+  ion-searchbar.searchbar {
+    &.searchbar-ios, &.searchbar-md {
+      padding-left: 0;
+      padding-right: 0;
+      margin-top: 10px;
+    }
+  }
+  .word-wrap {
+    word-wrap: break-word;
+    // overflow-x: hidden;
+    // text-overflow: ellipsis;
+    white-space:normal;
+  }
+  .customTitle {
+    padding: 35px 30px 25px 30px;
+    background: transparentize(black, 0.5);
+    margin: 0;
+    color: white;
+  }
+  ion-card {
+    &.card-md, &.card-ios {
+
+      border-radius: 5px;
+      margin:30px;
+      width: calc(100% - 60px);
+      box-shadow: none;
+      background: #404654;
+      .card-header{
+        &.card-header-md, &.card-header-ios {
+          padding: 20px 16px 5px 16px !important;
+          h1,h2,h3,h4,h5,h6 {
+            color: white;
+          }
+        }
+      }
+    }
+
+    ion-card-content {
+      &.card-content-md, &.card-content-ios {
+        h1,h2,h3,h4,h5,h6, p, small {
+          color: white;
+        }
+      }
+    }
+  }
+
+  .fab {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+      ion-tabs > div.tabbar.show-tabbar {
+  background: darken(#404654, 10%);
+  a.tab-button[aria-selected=true] .tab-button-icon {
+    color: white;
+  }
+  a.tab-button, a.tab-button ion-icon {
+    color : white;
+  }
+}
+
+.app-background {
+  background-color: #1e222d !important;
+}
+
+ion-loading .loading-wrapper {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.text-input-clear-icon {
+    background-color: transparent;
+}
+
+// Google maps autocomplete item
+.pac-item {
+    height: 5rem;
+    display: flex;
+    align-items: center;
+}
+
+ion-chip {
+    margin: 5px !important;
+    border: 1px solid deepskyblue;
+    color: white !important;
+    font-weight: bold !important;
+    .button {
+        color: deepskyblue;
+    }
+}
+
+// POP-IN (FLOAT ACTION BUTTON EFFECT) -------------
+.pop-in {
+  animation: pop-in 0.65s;
+}
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0);
+  }
+  45% {
+    transform: scale(0);
+  }
+  90% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// POP-OUT (FLOAT ACTION BUTTON EFFECT) -------------
+.pop-out {
+  animation: pop-out 2.5s forwards;
+}
+
+@keyframes pop-out {
+  0% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(0);
+  }
+}

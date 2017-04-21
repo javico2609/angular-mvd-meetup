@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { Nav, Platform, MenuController } from 'ionic-angular';
+import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -13,7 +13,6 @@ import { LayoutFacade } from './../facades';
   templateUrl: 'app.html'
 })
 export class IonicStarterApp implements OnInit {
-  @ViewChild('content') nav: Nav;
 
   rootPage: any = HomePage;
   pages: Array<{ title: string, component: any }>;
@@ -22,7 +21,6 @@ export class IonicStarterApp implements OnInit {
     public platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public menu: MenuController,
     private layoutFacade: LayoutFacade
   ) {
     this.initializeApp();
@@ -42,13 +40,6 @@ export class IonicStarterApp implements OnInit {
       this.statusBar.backgroundColorByHexString('#4267b2');
       this.splashScreen.hide();
     });
-  }
-
-  openPage(page) {
-    // close the menu when clicking a link from the menu
-    this.menu.close();
-    // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component);
   }
 
   ngAfterViewInit() {

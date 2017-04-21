@@ -1,1 +1,2 @@
-export * from './settings.services';
+export * from './settings.service';
+export * from './meetup.service';

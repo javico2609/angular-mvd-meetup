@@ -1,26 +1,31 @@
-
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Hello Ionic</ion-title>
-  </ion-navbar>
+  <ion-searchbar #searchbar placeholder="Search city or address"></ion-searchbar>
 </ion-header>
 
+<ion-content class="primary-font">
 
-<ion-content padding>
+  <div class="mt-header">
+    <div class="customTitle">
+      <h1 *ngIf="view == 'meetups'">Upcoming Meetups</h1>
+      <h1 *ngIf="view == 'groups'">Meetup Groups</h1>
+    </div>
+    <ion-segment [(ngModel)]="view" mode="md">
+      <ion-segment-button value="meetups" ion-text color="white">
+        Meetups
+      </ion-segment-button>
+      <ion-segment-button value="groups">
+        Groups
+      </ion-segment-button>
+    </ion-segment>
+  </div>
 
-  <h3>Welcome to your first Ionic app!</h3>
-
-  <p>
-    This starter project is our way of helping you get a functional app running in record time.
-  </p>
-  <p>
-    Follow along on the tutorial section of the Ionic docs!
-  </p>
-  <p>
-    <button ion-button color="primary" menuToggle>Toggle Menu</button>
-  </p>
+   <div padding class="selected-topics">
+    <ion-chip *ngFor="let topic of selectedTopics">
+      <ion-label>{{ topic }}</ion-label>
+      <button ion-button clear (click)="deleteTopic(topic)">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-chip>
+  </div>
 
 </ion-content>
