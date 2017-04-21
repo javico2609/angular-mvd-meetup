@@ -1,6 +1,6 @@
-# Ionic 3 + ngrx\store + redux
+# Meetup MVD Montevideo
 
-Ionic Starter using ionic 3, ionic cli 3, ionic native 3, ngrx\store, ngrx\effects, store-devtools, reselect, ngrx-store-logger, redux dev tool 
+Ionic 3, ngrx\store and the Meetup API 
 
 ## Getting Started
 
@@ -8,21 +8,6 @@ Ionic Starter using ionic 3, ionic cli 3, ionic native 3, ngrx\store, ngrx\effec
 npm install
 ionic serve
 ```
-
-### Layers
-
-* UI Layer 
-put here all angular component ( container and presentation components )
-
-* Facade Layer
-expose all API to comunicate UI Layer to STORE and SERVICE Layer
-
-* STORE and SERVICE Layer
-reducers, actions, effects, selectors, middleware, services  
-
-
-## Version
-```0.1```
 
 ## Authors
 
