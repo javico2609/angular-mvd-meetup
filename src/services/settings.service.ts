@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-
+import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 
 @Injectable()
 export class SettingsService {
 
-    constructor() { }
+    constructor(private geolocation: Geolocation) { }
 
     setTheme(theme: string): Promise<any> {
         return new Promise((resolve, reject) => {
@@ -31,5 +31,9 @@ export class SettingsService {
                 { icon: 'home', title: 'Home' },
             ]
         })
+    }
+
+    loadGeolocation(): Observable<Geoposition> {
+        return Observable.fromPromise(this.geolocation.getCurrentPosition());
     }
 }

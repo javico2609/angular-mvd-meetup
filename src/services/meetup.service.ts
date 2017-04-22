@@ -40,7 +40,7 @@ export class MeetupService {
             : this.http.get("https://crossorigin.me/" + endpoint, options).map(res => res.json());
     }
 
-    getMeetups(topics, lat?, long?): any {
+    getMeetups(topics, lat?, long?): Observable<any> {
         let params = {
             // city     : city,
             text: topics || '',

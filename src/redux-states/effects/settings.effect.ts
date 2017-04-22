@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 
 import * as layout from './../actions/layout';
+import * as meetup from './../actions/meetup';
 import { SettingsService } from './../../services';
 
 @Injectable()
@@ -15,6 +16,22 @@ export class SettingsEffects {
         private actions$: Actions,
         private settingsService: SettingsService
     ) { }
+
+    @Effect() loadFrameworkCommonRequest$ = this.actions$
+        .ofType(layout.ActionTypes.LOAD_INIT_CONFIGURATION)
+        .map<Action, void>(toPayload)
+        .switchMap(() => Observable.combineLatest(
+            this.settingsService.loadInitConfiguration(),
+            this.settingsService.loadGeolocation(),
+            (settings, geolocation) => { return { settings: settings, geolocation: geolocation } }).take(1)
+            .mergeMap((data: { settings: any, geolocation: any }) => {
+                return [
+                    new layout.LoadInitConfigurationCompleteAction(data.settings),
+                    new meetup.LoadInitGeolocationCompleteAction(data.geolocation)
+                ];
+            })
+            .catch(error => Observable.of(new layout.LoadInitConfigurationFailAction({ error })))
+        );
 
     @Effect() loadInitConfig$ = this.actions$
         .ofType(layout.ActionTypes.LOAD_INIT_CONFIGURATION)

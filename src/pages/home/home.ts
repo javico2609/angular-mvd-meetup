@@ -1,5 +1,7 @@
+import { Observable } from 'rxjs/Rx';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { MeetupFacade } from './../../facades';
 
 @Component({
   selector: 'page-home',
@@ -7,15 +9,18 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class HomePage {
   view: string = "meetups";
-  selectedTopics: string[] = [];
+  selectedTopics$: Observable<string[]>;
+  meetups$: Observable<any>;
 
-  constructor() { }
+  constructor(private meetupFacade: MeetupFacade) { }
 
   ionViewDidLoad() {
-    this.selectedTopics = [
-      'Ionic',
-      'Angular 2',
-      'React'
-    ];
+    this.meetupFacade.loadMeetups();
+    this.selectedTopics$ = this.meetupFacade.getTopics();
+    this.meetups$ = this.meetupFacade.getMeetups();
+  }
+
+  headerMeetupFn(record, recordIndex, records) {
+    return record.group.name;
   }
 }
