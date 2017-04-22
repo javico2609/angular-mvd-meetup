@@ -63,7 +63,7 @@
 }
 
 ion-header {
-   background-color: #1e222d !important;
+   background-color: rgb(237,28,64) !important;
 }
 
 .bold {font-weight:bold;}
@@ -83,7 +83,7 @@ ion-header {
   // @extend .primary-font;
   ion-content .scroll-content {
     &.content-ios, &.content-md {
-      background-color: #1e222d !important;
+      background-color: rgb(237,28,64) !important;
     }
   }
   ion-searchbar.searchbar {
@@ -99,14 +99,9 @@ ion-header {
     // text-overflow: ellipsis;
     white-space:normal;
   }
-  .customTitle {
-    padding: 35px 30px 25px 30px;
-    background: transparentize(black, 0.5);
-    margin: 0;
-    color: white;
-  }
+
   ion-card {
-    &.card-md, &.card-ios {
+    &.card-md, &.card-ios, &.card-wp {
 
       border-radius: 5px;
       margin:30px;
@@ -114,7 +109,7 @@ ion-header {
       box-shadow: none;
       background: #404654;
       .card-header{
-        &.card-header-md, &.card-header-ios {
+        &.card-header-md, &.card-header-ios, &.card-header-wp {
           padding: 20px 16px 5px 16px !important;
           h1,h2,h3,h4,h5,h6 {
             color: white;
@@ -124,7 +119,7 @@ ion-header {
     }
 
     ion-card-content {
-      &.card-content-md, &.card-content-ios {
+      &.card-content-md, &.card-content-ios, &.card-content-wp {
         h1,h2,h3,h4,h5,h6, p, small {
           color: white;
         }
@@ -133,7 +128,7 @@ ion-header {
   }
 
   .fab {
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgb(237,28,64);
     }
 
       ion-tabs > div.tabbar.show-tabbar {

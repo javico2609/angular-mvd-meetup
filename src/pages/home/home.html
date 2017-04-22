@@ -1,22 +1,36 @@
 <ion-header>
-  <ion-searchbar #searchbar placeholder="Search city or address"></ion-searchbar>
-</ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
 
-<ion-content class="primary-font">
-
-  <div class="mt-header">
-    <div class="customTitle">
-      <h1 *ngIf="view == 'meetups'">Upcoming Meetups</h1>
-      <h1 *ngIf="view == 'groups'">Meetup Groups</h1>
-    </div>
-    <ion-segment [(ngModel)]="view" mode="md">
-      <ion-segment-button value="meetups" ion-text color="white">
+    <ion-segment [(ngModel)]="view">
+      <ion-segment-button value="meetups">
         Meetups
       </ion-segment-button>
       <ion-segment-button value="groups">
         Groups
       </ion-segment-button>
     </ion-segment>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="filterPopup($event)">
+          <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-searchbar color="primary" [(ngModel)]="queryText" (ionInput)="updateSchedule()" placeholder="Search">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="primary-font">
+
+  <div class="customTitle" text-center>
+    <h1 *ngIf="view == 'meetups'">Upcoming Meetups</h1>
+    <h1 *ngIf="view == 'groups'">Meetup Groups</h1>
   </div>
 
   <div padding class="selected-topics">
@@ -28,26 +42,57 @@
     </ion-chip>
   </div>
 
-  <ion-grid>
+  <ion-list [virtualScroll]="meetups$ | async" [headerFn]="headerMeetupFn" approxItemHeight="250px">
+
+    <ion-item-divider *virtualHeader="let header">
+      {{ header }}
+    </ion-item-divider>
+
+    <button ion-item *virtualItem="let event">
+      <small item-left>{{ event.time | date:"jm" }}</small>
+      <h2 class="event-group">{{ event.group.name }}</h2>
+      <p text-wrap text-justify class="event-name">{{ event.name }}</p>    
+      <h6 text-justify class="secondary-font"><ion-icon name="pin"></ion-icon>   
+        <span *ngIf="!event.venue?.name">Undisclosed</span>
+        <span *ngIf="event.venue?.name">{{event.venue?.name}}</span>
+        <span *ngIf="!event.venue?.address_1"></span>
+        <span *ngIf="event.venue?.address_1"> , {{event.venue?.address_1}}</span>
+      </h6>
+      <h6 text-justify class="secondary-font"><ion-icon name="md-walk"></ion-icon>
+        <span> Distance: {{event.distance | distance}} </span>
+      </h6>
+      <h6 text-justify class="secondary-font">
+        <span>{{ event.yes_rsvp_count }} {{ event.group.who}} going</span>
+      </h6>
+    </button>
+
+  </ion-list>
+
+
+
+  <!--<ion-grid>
     <ion-row>
       <ion-col col-12 *ngFor="let event of meetups$ | async">
         <ion-card (click)="goToDetail(event)">
           <ion-card-header>
-            <h2 class="word-wrap secondary-font" [innerHTML]="event.name"></h2>
+            <h2 class="word-wrap secondary-font" [innerHTML]="event.name" text-justify></h2>
           </ion-card-header>
           <ion-card-content>
             <small class="semi-transparent">on {{event.time | date}}</small>
             <small class="semi-transparent"> , Distance: {{event.distance | distance}}</small>
-            <h6 class="secondary-font">At
+            <h6 text-justify class="secondary-font">At
               <span *ngIf="!event.venue?.name">Undisclosed</span>
               <span *ngIf="event.venue?.name">{{event.venue?.name}}</span>
               <span *ngIf="!event.venue?.address_1"></span>
               <span *ngIf="event.venue?.address_1"> , {{event.venue?.address_1}}</span>
             </h6>
+            <p text-justify class="secondary-font">
+              <span>{{ event.yes_rsvp_count }} {{ event.group.who}} going</span>
+            </p>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid>-->
 
 </ion-content>

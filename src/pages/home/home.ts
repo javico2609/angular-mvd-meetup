@@ -1,7 +1,10 @@
+import { DatePipe } from '@angular/common';
+import { FilterTopicsPage } from './filter-topics';
 import { Observable } from 'rxjs/Rx';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, PopoverController } from 'ionic-angular';
 import { MeetupFacade } from './../../facades';
+
 
 @Component({
   selector: 'page-home',
@@ -9,10 +12,14 @@ import { MeetupFacade } from './../../facades';
 })
 export class HomePage {
   view: string = "meetups";
+  queryText: string = '';
   selectedTopics$: Observable<string[]>;
   meetups$: Observable<any>;
 
-  constructor(private meetupFacade: MeetupFacade) { }
+  constructor(
+    private meetupFacade: MeetupFacade,
+    private popoverCtrl: PopoverController
+  ) { }
 
   ionViewDidLoad() {
     this.meetupFacade.loadMeetups();
@@ -21,6 +28,16 @@ export class HomePage {
   }
 
   headerMeetupFn(record, recordIndex, records) {
-    return record.group.name;
+    let datePipe = new DatePipe('en-US');
+    let currentDate = datePipe.transform(record.time);
+
+    if (recordIndex === 0) return currentDate;
+    if (currentDate != datePipe.transform(records[recordIndex - 1].time)) return currentDate;
+
+    return null;
+  }
+
+  filterPopup(ev) {
+    let popover = this.popoverCtrl.create(FilterTopicsPage).present({ ev: ev });
   }
 }

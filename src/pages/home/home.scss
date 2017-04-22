@@ -1,10 +1,32 @@
 page-home {
+
+  .event-group {
+      stroke: transparent;
+      fill: rgba(0,0,0,.54);
+      color: rgba(0,0,0,.54);
+      text-transform: uppercase;
+      font-size: 13px;
+  }
+
+  .event-name {
+      color: black;
+      //font-weight: bold;
+  }
+
+  h6 {
+    ion-icon {
+      margin-left: 2px;
+    }
+  }
+
   h3, .segment-button {
     color: white !important;
   }
-ion-searchbar{
-  padding: 8px !important;
-}
+
+  ion-searchbar{
+    padding: 8px !important;
+  }
+
   .selected-topics {
     overflow: auto;
     display: flex;
@@ -23,38 +45,66 @@ ion-searchbar{
     color : transparentize(white, 0.5) !important;
   }
 
-  // @extend .primary-font;
-  ion-content .fixed-content {
-    background-color: #1e222d;
-  }
   .word-wrap {
     word-wrap: break-word;
-    // overflow-x: hidden;
-    // text-overflow: ellipsis;
     white-space:normal;
   }
+
   .segment-button.segment-activated{
-    border-color: #ffffff !important;
+    border-bottom-color: #ffffff !important;
     opacity: .7;
   }
+
+  .toolbar .searchbar-ios .searchbar-input {
+    background: #ffffff;
+  }
+
+  .segment-ios .segment-button {
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      width: 0;
+      height: 3.2rem;
+      border: none;
+      font-size: 1.3rem;
+      line-height: 3rem;
+      background-color: transparent;
+      border-color: rgb(237,28,64);
+  }
+
+  .segment-ios .segment-button.segment-activated {
+      color: #fff;
+      background-color: rgb(237,28,64);
+      opacity: 1;
+      transition: 100ms all linear;
+      border-width: 2px;
+      border-style: solid;
+      border-bottom-color: white;
+  }
+
   .mt-header {
-    background: transparentize(black, 0.5);
+    background: transparentize(rgb(237,28,64), 0.2);
     margin: 0;
     color: white;
   }
+
   .customTitle {
-    padding: 5px 20px 25px 20px;
+    background: transparentize(rgb(237,28,64), 0.2) !important;
+    margin: 0;
+    color: white;
+     padding: 5px 20px 10px 20px;
   }
+
   ion-card {
-    &.card-md, &.card-ios {
+    &.card-md, &.card-ios, &.card-wp {
 
       border-radius: 5px;
-          margin: 10px;
-    width: calc(100% - 20px);
+          margin: 5px;
+    width: calc(100% - 10px);
       box-shadow: none;
       background: #404654;
       .card-header{
-        &.card-header-md, &.card-header-ios {
+        &.card-header-md, &.card-header-ios, &.card-header-wp {
           h1,h2,h3,h4,h5,h6 {
             color: white;
           }
@@ -63,7 +113,7 @@ ion-searchbar{
     }
 
     ion-card-content {
-      &.card-content-md, &.card-content-ios {
+      &.card-content-md, &.card-content-ios, &.card-content-wp {
         h1,h2,h3,h4,h5,h6, p {
           color: white;
         }

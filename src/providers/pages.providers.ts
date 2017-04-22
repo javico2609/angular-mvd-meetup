@@ -1,8 +1,8 @@
 import {
-    HomePage
+    HomePage, FilterTopicsPage
 } from '../pages/pages';
 
 
 export const PAGES_PROVIDERS = [
-    HomePage
+    HomePage, FilterTopicsPage
 ];
