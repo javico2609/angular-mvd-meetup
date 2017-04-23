@@ -16,6 +16,7 @@ export class HomePage implements OnDestroy{
   queryText: string = '';
   selectedTopics$: Observable<string[]>;
   meetups$: Observable<any>;
+  groups$: Observable<any>;
 
   constructor(
     private meetupFacade: MeetupFacade,
@@ -26,6 +27,7 @@ export class HomePage implements OnDestroy{
     this.meetupFacade.loadMeetups();
     this.selectedTopics$ = this.meetupFacade.getTopics();
     this.meetups$ = this.meetupFacade.getMeetups();
+    this.groups$ = this.meetupFacade.getGroups();
     this.viewSubscribe = this.meetupFacade.getViewSeleted().subscribe(view => this.view = view);
   }
 

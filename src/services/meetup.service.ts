@@ -71,10 +71,13 @@ export class MeetupService {
 
     getMeetupGroups(topics, lat?, long?): any {
         let requests: Observable<any>[] = [];
-        
+
         for (let topic in topics) {
             requests.push(this.fetchMeetupGroup(topic, lat, long));
         }
+
+        if (topics.length === 0)
+            requests.push(this.fetchMeetupGroup('', lat, long));
 
         return Observable.forkJoin(requests).flatMap((result: any) => result.map(meetup => meetup.data));
     }

@@ -1,5 +1,5 @@
 {
-  "name": "Ionic3StarterRedux",
+  "name": "AngularMVDMeetup",
   "version": "1.0.0",
   "author": "javico",
   "homepage": "https://github.com/javico2609",
@@ -55,5 +55,5 @@
     "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [],
-  "description": "Ionic3 redux starter"
+  "description": "Meetup App"
 }

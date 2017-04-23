@@ -1,4 +1,4 @@
-import { Meetup } from '../redux-states/reducers/meetup';
+import { Meetup, Group } from '../redux-states/reducers/meetup';
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
@@ -37,6 +37,10 @@ export class MeetupFacade {
 
     getMeetups(): Observable<Meetup[]> {
         return this.store.select(s => s.meetup.meetups);
+    }
+
+    getGroups(): Observable<Group[]> {
+        return this.store.select(s => s.meetup.groups);
     }
 
     getViewSeleted(): Observable<string> {
