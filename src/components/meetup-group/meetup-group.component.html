@@ -1,0 +1,30 @@
+<ion-card *ngFor="let group of groups">
+  <ion-item>
+    <ion-avatar item-left>
+      <img *ngIf="group.organizer.photo" [src]="group.organizer.photo.thumb_link">
+    </ion-avatar>
+    <h2>{{ group.organizer.name}}</h2>
+    <p>{{group.organizer.bio}}</p>
+  </ion-item>
+
+  <img *ngIf="group.group_photo" [src]="group.group_photo.photo_link">
+
+  <ion-card-content>
+    <div text-justify [innerHTML]="group.description"></div>
+  </ion-card-content>
+
+  <ion-row>
+    <ion-col>
+      <button ion-button icon-left clear small>
+            <ion-icon name="ios-people"></ion-icon>
+            <div>{{ group.members }} {{ group.who }}</div>
+          </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left clear small>
+            <ion-icon name="md-calendar"></ion-icon>
+            <div>{{ group.created | date }}</div>
+          </button>
+    </ion-col>
+  </ion-row>
+</ion-card>

@@ -15,4 +15,4 @@ import { ShareModule } from "../../components/share.module";
     HomePage
   ]
 })
-export class AboutPageModule {}
+export class HomePageModule {}
