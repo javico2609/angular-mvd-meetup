@@ -1,17 +1,18 @@
 import { DatePipe } from '@angular/common';
 import { FilterTopicsPage } from './filter-topics';
 import { Observable } from 'rxjs/Rx';
-import { Component } from '@angular/core';
-import { NavController, NavParams, PopoverController } from 'ionic-angular';
+import { Component, OnDestroy } from '@angular/core';
+import { NavController, NavParams, PopoverController, IonicPage } from 'ionic-angular';
 import { MeetupFacade } from './../../facades';
 
-
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
-  view: string = "meetups";
+export class HomePage implements OnDestroy{
+  view: string;
+  viewSubscribe: any;
   queryText: string = '';
   selectedTopics$: Observable<string[]>;
   meetups$: Observable<any>;
@@ -25,6 +26,7 @@ export class HomePage {
     this.meetupFacade.loadMeetups();
     this.selectedTopics$ = this.meetupFacade.getTopics();
     this.meetups$ = this.meetupFacade.getMeetups();
+    this.viewSubscribe = this.meetupFacade.getViewSeleted().subscribe(view => this.view = view);
   }
 
   headerMeetupFn(record, recordIndex, records) {
@@ -39,5 +41,13 @@ export class HomePage {
 
   filterPopup(ev) {
     let popover = this.popoverCtrl.create(FilterTopicsPage).present({ ev: ev });
+  }
+
+  changeView() {
+    this.meetupFacade.updateSelectedView(this.view);
+  }
+
+  ngOnDestroy() {
+    this.viewSubscribe.unsubscribe();
   }
 }

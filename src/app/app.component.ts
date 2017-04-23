@@ -3,9 +3,6 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-// Home Page
-import { HomePage } from '../pages/pages';
-
 // Store and Service Facade
 import { LayoutFacade } from './../facades';
 
@@ -14,8 +11,7 @@ import { LayoutFacade } from './../facades';
 })
 export class IonicStarterApp implements OnInit {
 
-  rootPage: any = HomePage;
-  pages: Array<{ title: string, component: any }>;
+  rootPage: string = 'HomePage';
 
   constructor(
     public platform: Platform,
@@ -24,10 +20,6 @@ export class IonicStarterApp implements OnInit {
     private layoutFacade: LayoutFacade
   ) {
     this.initializeApp();
-
-    this.pages = [
-      { title: 'Home', component: HomePage }
-    ];
   }
 
   ngOnInit() {
@@ -37,7 +29,7 @@ export class IonicStarterApp implements OnInit {
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.overlaysWebView(true);
-      this.statusBar.backgroundColorByHexString('#4267b2');
+      this.statusBar.backgroundColorByHexString('rgb(237,28,64)');
       this.splashScreen.hide();
     });
   }

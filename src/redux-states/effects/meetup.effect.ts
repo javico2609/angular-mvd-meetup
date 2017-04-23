@@ -19,8 +19,16 @@ export class MeetupEffects {
     @Effect() loadMeetups$ = this.actions$
         .ofType(meetup.ActionTypes.LOAD_INIT_MEETUPS)
         .map<Action, { topics: string, latitude: number, longitude: number }>(toPayload)
-        .switchMap((payload) => this.meetupService.getMeetups(payload.topics,payload.latitude,payload.longitude)
+        .switchMap((payload) => this.meetupService.getMeetups(payload.topics, payload.latitude, payload.longitude)
             .map(payload => new meetup.LoadMeetupsCompleteAction(payload.results))
             .catch(error => Observable.of(new meetup.LoadMeetupsFailAction({ error })))
+        );
+
+    @Effect() loadGroups$ = this.actions$
+        .ofType(meetup.ActionTypes.LOAD_INIT_GROUPS)
+        .map<Action, { topics: string[], latitude: number, longitude: number }>(toPayload)
+        .switchMap((payload) => this.meetupService.getMeetupGroups(payload.topics, payload.latitude, payload.longitude)
+            .map(payload => new meetup.LoadGroupsCompleteAction(payload.data))
+            .catch(error => Observable.of(new meetup.LoadGroupsFailAction({ error })))
         );
 }

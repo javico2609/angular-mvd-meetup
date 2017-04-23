@@ -30,7 +30,7 @@ export interface Group {
     who: string;
 }
 
-export interface Meetups {
+export interface Meetup {
     utc_offset: number;
     venue: Venue;
     rsvp_limit: number;
@@ -54,13 +54,17 @@ export interface Meetups {
 export interface State {
     coordinates: Coordinates,
     selectedTopics: string[],
-    meetups: Meetups[]
+    meetups: Meetup[],
+    groups: Group[],
+    viewGroupOrMeetupSelected: string
 }
 
 const initialState: State = {
     coordinates: { latitude: -34.9058796, longitude: -56.140805699999994 },
     selectedTopics: [],
-    meetups: []
+    meetups: [],
+    groups: [],
+    viewGroupOrMeetupSelected: 'meetups'
 };
 
 export function reducer(state = initialState, action: meetup.Actions): State {
@@ -76,6 +80,12 @@ export function reducer(state = initialState, action: meetup.Actions): State {
 
         case meetup.ActionTypes.LOAD_INIT_MEETUPS_COMPLETE:
             return tassign(state, { meetups: action.payload });
+
+        case meetup.ActionTypes.UPDATE_SHOW_VIEW:
+            return tassign(state, { viewGroupOrMeetupSelected: action.payload });
+
+        case meetup.ActionTypes.LOAD_INIT_GROUPS_COMPLETE:
+            return tassign(state, { groups: action.payload });
 
         default:
             return state;

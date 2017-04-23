@@ -42,7 +42,6 @@ export class MeetupService {
 
     getMeetups(topics, lat?, long?): Observable<any> {
         let params = {
-            // city     : city,
             text: topics || '',
             time: ',1w',
             category: this.CATEGORIES.TECH,
@@ -55,5 +54,28 @@ export class MeetupService {
 
         let endpoint = 'open_events';
         return this.get(this.baseUrlV2 + endpoint, params);
+    }
+
+    fetchMeetupGroup(topic, lat, long) {
+        let params = {
+            text: topic || '',
+            lat: lat,
+            lon: long,
+            category: this.CATEGORIES.TECH,
+        }
+
+        let endpoint = "find/groups"
+        let cacheKey = endpoint + JSON.stringify(params);
+        return this.get(this.baseUrlV1 + endpoint, params);
+    }
+
+    getMeetupGroups(topics, lat?, long?): any {
+        let requests: Observable<any>[] = [];
+        
+        for (let topic in topics) {
+            requests.push(this.fetchMeetupGroup(topic, lat, long));
+        }
+
+        return Observable.forkJoin(requests).flatMap((result: any) => result.map(meetup => meetup.data));
     }
 }

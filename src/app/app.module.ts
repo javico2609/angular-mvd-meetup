@@ -2,7 +2,7 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { BrowserModule } from '@angular/platform-browser';
-import { SERVICES_PROVIDERS, PAGES_PROVIDERS, NATIVES_PROVIDERS, PIPES_PROVIDERS } from '../providers/providers';
+import { SERVICES_PROVIDERS, PAGES_PROVIDERS, NATIVES_PROVIDERS } from '../providers/providers';
 import { IonicStarterApp } from './app.component';
 
 import { StoreModule } from '@ngrx/store';
@@ -14,15 +14,13 @@ import { AppEffectModules } from '../redux-states/effects';
 @NgModule({
   declarations: [
     IonicStarterApp,
-    PAGES_PROVIDERS,
-    PIPES_PROVIDERS
+    PAGES_PROVIDERS
   ],
   imports: [
     BrowserModule,
     HttpModule,
     JsonpModule,
     IonicModule.forRoot(IonicStarterApp),
-
     /**
      * StoreModule.provideStore is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of

@@ -9,7 +9,35 @@ export const ActionTypes = {
     LOAD_INIT_MEETUPS: type('[Meetup] Load Meetups'),
     LOAD_INIT_MEETUPS_COMPLETE: type('[Meetup] Load Meetups COMPLETE'),
     LOAD_INIT_MEETUPS_FAIL: type('[Meetup] Load Meetups FAIL'),
+
+    LOAD_INIT_GROUPS: type('[Meetup] Load Groups'),
+    LOAD_INIT_GROUPS_COMPLETE: type('[Meetup] Load Groups COMPLETE'),
+    LOAD_INIT_GROUPS_FAIL: type('[Meetup] Load Groups FAIL'),
+
+    UPDATE_SHOW_VIEW: type('[VIEW] Update view selected on home page')
 };
+
+export class LoadGroupsAction implements Action {
+    type = ActionTypes.LOAD_INIT_GROUPS;
+    constructor(public payload: any = {}) { }
+}
+
+export class LoadGroupsCompleteAction implements Action {
+    type = ActionTypes.LOAD_INIT_GROUPS_COMPLETE;
+
+    constructor(public payload: any) { }
+}
+
+export class LoadGroupsFailAction implements Action {
+    type = ActionTypes.LOAD_INIT_GROUPS_FAIL;
+
+    constructor(public payload: any) { }
+}
+
+export class UpdateSelectedViewAction implements Action {
+    type = ActionTypes.UPDATE_SHOW_VIEW;
+    constructor(public payload: any = {}) { }
+}
 
 export class LoadInitGeolocationAction implements Action {
     type = ActionTypes.LOAD_INIT_GEOLOCATION;
@@ -51,4 +79,8 @@ export type Actions =
     LoadInitGeolocationFailAction |
     LoadMeetupsAction |
     LoadMeetupsCompleteAction |
-    LoadMeetupsFailAction;
+    LoadMeetupsFailAction |
+    UpdateSelectedViewAction |
+    LoadGroupsAction |
+    LoadGroupsCompleteAction |
+    LoadGroupsFailAction;

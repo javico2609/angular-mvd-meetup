@@ -4,7 +4,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
 
-    <ion-segment [(ngModel)]="view">
+    <ion-segment [(ngModel)]="view" (ionChange)="changeView($event)">
       <ion-segment-button value="meetups">
         Meetups
       </ion-segment-button>
