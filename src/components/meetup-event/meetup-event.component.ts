@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'meetup-event',
-  templateUrl: './meetup-event.component.html'
+  templateUrl: './meetup-event.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MeetupEventComponent implements OnInit {
   @Input() meetups;

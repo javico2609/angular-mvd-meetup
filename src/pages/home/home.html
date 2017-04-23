@@ -1,36 +1,12 @@
 <ion-header>
-  <ion-navbar no-border-bottom>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-
-    <ion-segment [(ngModel)]="view" (ionChange)="changeView($event)">
-      <ion-segment-button value="meetups">
-        Meetups
-      </ion-segment-button>
-      <ion-segment-button value="groups">
-        Groups
-      </ion-segment-button>
-    </ion-segment>
-
-    <ion-buttons end>
-      <button ion-button icon-only (click)="filterPopup($event)">
-          <ion-icon name="search"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-
-  <ion-toolbar no-border-top>
-    <ion-searchbar color="primary" [(ngModel)]="queryText" (ionInput)="updateSchedule()" placeholder="Search">
-    </ion-searchbar>
-  </ion-toolbar>
+  <meetup-navbar (changeView)="changeView($event)" [view]="view$ | async"></meetup-navbar>
 </ion-header>
 
 <ion-content class="primary-font">
 
   <div class="customTitle" text-center>
-    <h1 *ngIf="view == 'meetups'">Upcoming Meetups</h1>
-    <h1 *ngIf="view == 'groups'">Meetup Groups</h1>
+    <h1 *ngIf="isMeetupEvent()">Upcoming Meetups</h1>
+    <h1 *ngIf="!isMeetupEvent()">Meetup Groups</h1>
   </div>
 
   <div padding class="selected-topics">
@@ -42,7 +18,7 @@
     </ion-chip>
   </div>
 
-<meetup-event *ngIf="view == 'meetups'" [meetups]="meetups$ | async"></meetup-event>
-<meetup-group *ngIf="view == 'groups'" [groups]="groups$ | async"></meetup-group>
+  <meetup-event *ngIf="isMeetupEvent()" [meetups]="meetups$ | async"></meetup-event>
+  <meetup-group *ngIf="!isMeetupEvent()" [groups]="groups$ | async"></meetup-group>
 
 </ion-content>

@@ -10,9 +10,9 @@ import { MeetupFacade } from './../../facades';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage implements OnDestroy{
-  view: string;
-  viewSubscribe: any;
+export class HomePage implements OnDestroy {
+  view$: Observable<string>;
+  view: string = 'meetups';
   queryText: string = '';
   selectedTopics$: Observable<string[]>;
   meetups$: Observable<any>;
@@ -24,22 +24,36 @@ export class HomePage implements OnDestroy{
   ) { }
 
   ionViewDidLoad() {
-    this.meetupFacade.loadMeetups();
     this.selectedTopics$ = this.meetupFacade.getTopics();
     this.meetups$ = this.meetupFacade.getMeetups();
     this.groups$ = this.meetupFacade.getGroups();
-    this.viewSubscribe = this.meetupFacade.getViewSeleted().subscribe(view => this.view = view);
+    this.view$ = this.meetupFacade.getViewSeleted();
+    this.loadData();
   }
 
   filterPopup(ev) {
     let popover = this.popoverCtrl.create(FilterTopicsPage).present({ ev: ev });
   }
 
-  changeView() {
-    this.meetupFacade.updateSelectedView(this.view);
+  changeView(view) {
+    this.view = view;
+    this.meetupFacade.updateSelectedView(view);
+  }
+
+  isMeetupEvent() {
+    return this.view === 'meetups';
+  }
+
+  loadData() {
+    if (!this.isMeetupEvent()) {
+      this.meetupFacade.loadGroups();
+      return;
+    }
+
+    this.meetupFacade.loadMeetups();
   }
 
   ngOnDestroy() {
-    this.viewSubscribe.unsubscribe();
+
   }
 }

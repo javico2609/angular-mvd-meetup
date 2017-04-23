@@ -1,13 +1,13 @@
 <ion-card *ngFor="let group of groups">
   <ion-item>
     <ion-avatar item-left>
-      <img *ngIf="group.organizer.photo" [src]="group.organizer.photo.thumb_link">
+      <ion-img *ngIf="group.organizer.photo" [src]="group.organizer.photo.thumb_link"></ion-img>
     </ion-avatar>
     <h2>{{ group.organizer.name}}</h2>
     <p>{{group.organizer.bio}}</p>
   </ion-item>
 
-  <img *ngIf="group.group_photo" [src]="group.group_photo.photo_link">
+  <ion-img *ngIf="group.group_photo" [src]="group.group_photo.photo_link"></ion-img>
 
   <ion-card-content>
     <div text-justify [innerHTML]="group.description"></div>

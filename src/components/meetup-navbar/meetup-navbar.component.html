@@ -1,0 +1,25 @@
+<ion-navbar no-border-bottom>
+  <button ion-button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+
+  <ion-segment [(ngModel)]="view" (ionChange)="changeViewEvent($event)">
+    <ion-segment-button value="meetups">
+      Meetups
+    </ion-segment-button>
+    <ion-segment-button value="groups">
+      Groups
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-buttons end>
+    <button ion-button icon-only (click)="filterPopup($event)">
+          <ion-icon name="search"></ion-icon>
+      </button>
+  </ion-buttons>
+</ion-navbar>
+
+<ion-toolbar no-border-top>
+  <ion-searchbar color="primary" [(ngModel)]="queryText" (ionInput)="updateSchedule()" placeholder="Search">
+  </ion-searchbar>
+</ion-toolbar>
