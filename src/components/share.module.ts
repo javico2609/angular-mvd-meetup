@@ -1,3 +1,4 @@
+import { HighlightPipe } from './pipes/highlight.pipe';
 import { DistancePipe } from './pipes/distance.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -11,6 +12,7 @@ import { MeetupNavbarComponent } from './meetup-navbar/meetup-navbar.component';
   imports: [CommonModule, IonicModule],
   declarations: [
     DistancePipe,
+    HighlightPipe,
     MeetupGroupComponent,
     MeetupEventComponent,
     MeetupNavbarComponent
@@ -19,6 +21,7 @@ import { MeetupNavbarComponent } from './meetup-navbar/meetup-navbar.component';
     MeetupGroupComponent,
     MeetupEventComponent,
     DistancePipe,
+    HighlightPipe,
     MeetupNavbarComponent
   ],
   providers: []

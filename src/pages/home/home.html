@@ -1,5 +1,5 @@
 <ion-header>
-  <meetup-navbar (changeView)="changeView($event)" [view]="view$ | async"></meetup-navbar>
+  <meetup-navbar (changeView)="changeView($event)" [view]="view$ | async" (onFilter)="filter($event)"></meetup-navbar>
 </ion-header>
 
 <ion-content class="primary-font">
@@ -19,6 +19,6 @@
   </div>
 
   <meetup-event *ngIf="isMeetupEvent()" [meetups]="meetups$ | async"></meetup-event>
-  <meetup-group *ngIf="!isMeetupEvent()" [groups]="groups$ | async"></meetup-group>
+  <meetup-group *ngIf="!isMeetupEvent()" [groups]="groups$ | async" [searchTerm]="searchTerm$ | async"></meetup-group>
 
 </ion-content>

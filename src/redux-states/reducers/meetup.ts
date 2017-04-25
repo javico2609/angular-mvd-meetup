@@ -2,6 +2,73 @@ import * as meetup from '../actions/meetup';
 import { tassign } from 'tassign';
 import * as _ from 'lodash';
 
+
+export interface Photo {
+    id: number;
+    highres_link: string;
+    photo_link: string;
+    thumb_link: string;
+    type: string;
+    base_url: string;
+}
+
+export interface Organizer {
+    id: number;
+    name: string;
+    bio: string;
+    photo: Photo;
+}
+
+export interface GroupPhoto {
+    id: number;
+    highres_link: string;
+    photo_link: string;
+    thumb_link: string;
+    type: string;
+    base_url: string;
+}
+
+export interface KeyPhoto {
+    id: number;
+    highres_link: string;
+    photo_link: string;
+    thumb_link: string;
+    type: string;
+    base_url: string;
+}
+
+export interface Category {
+    id: number;
+    name: string;
+    shortname: string;
+    sort_name: string;
+}
+
+export interface MeetupGroup {
+    score: number;
+    id: number;
+    name: string;
+    link: string;
+    urlname: string;
+    description: string;
+    created: number;
+    city: string;
+    country: string;
+    localized_country_name: string;
+    state: string;
+    join_mode: string;
+    visibility: string;
+    lat: number;
+    lon: number;
+    members: number;
+    organizer: Organizer;
+    who: string;
+    group_photo: GroupPhoto;
+    key_photo: KeyPhoto;
+    timezone: string;
+    category: Category;
+}
+
 export interface Coordinates {
     latitude: number;
     longitude: number;
@@ -54,8 +121,9 @@ export interface Meetup {
 export interface State {
     coordinates: Coordinates,
     selectedTopics: string[],
+    searchTerm: string,
     meetups: Meetup[],
-    groups: Group[],
+    groups: MeetupGroup[],
     viewGroupOrMeetupSelected: string
 }
 
@@ -64,7 +132,8 @@ const initialState: State = {
     selectedTopics: [],
     meetups: [],
     groups: [],
-    viewGroupOrMeetupSelected: 'meetups'
+    viewGroupOrMeetupSelected: 'meetups',
+    searchTerm: ''
 };
 
 export function reducer(state = initialState, action: meetup.Actions): State {
@@ -86,6 +155,9 @@ export function reducer(state = initialState, action: meetup.Actions): State {
 
         case meetup.ActionTypes.LOAD_INIT_GROUPS_COMPLETE:
             return tassign(state, { groups: action.payload });
+
+        case meetup.ActionTypes.UPDATE_SEARCH_TERM:
+            return tassign(state, { searchTerm: action.payload });
 
         default:
             return state;

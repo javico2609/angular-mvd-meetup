@@ -13,7 +13,7 @@ import { MeetupFacade } from './../../facades';
 export class HomePage implements OnDestroy {
   view$: Observable<string>;
   view: string = 'meetups';
-  queryText: string = '';
+  searchTerm$: Observable<string>;
   selectedTopics$: Observable<string[]>;
   meetups$: Observable<any>;
   groups$: Observable<any>;
@@ -28,6 +28,7 @@ export class HomePage implements OnDestroy {
     this.meetups$ = this.meetupFacade.getMeetups();
     this.groups$ = this.meetupFacade.getGroups();
     this.view$ = this.meetupFacade.getViewSeleted();
+    this.searchTerm$ = this.meetupFacade.getSearchTerm();
     this.loadData();
   }
 
@@ -51,6 +52,10 @@ export class HomePage implements OnDestroy {
     }
 
     this.meetupFacade.loadMeetups();
+  }
+
+  filter(searchText: string) {
+    this.meetupFacade.filterEventsOrGroup(searchText);
   }
 
   ngOnDestroy() {

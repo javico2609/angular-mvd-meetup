@@ -14,8 +14,15 @@ export const ActionTypes = {
     LOAD_INIT_GROUPS_COMPLETE: type('[Meetup] Load Groups COMPLETE'),
     LOAD_INIT_GROUPS_FAIL: type('[Meetup] Load Groups FAIL'),
 
-    UPDATE_SHOW_VIEW: type('[VIEW] Update view selected on home page')
+    UPDATE_SHOW_VIEW: type('[VIEW] Update view selected on home page'),
+
+    UPDATE_SEARCH_TERM: type('[VIEW] Update search term')
 };
+
+export class UpdateSearchTermAction implements Action {
+    type = ActionTypes.UPDATE_SEARCH_TERM;
+    constructor(public payload: any = {}) { }
+}
 
 export class LoadGroupsAction implements Action {
     type = ActionTypes.LOAD_INIT_GROUPS;

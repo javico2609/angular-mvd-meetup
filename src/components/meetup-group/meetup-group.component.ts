@@ -7,6 +7,7 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 })
 export class MeetupGroupComponent implements OnInit {
   @Input() groups;
+  @Input() searchTerm;
 
   constructor() { }
 

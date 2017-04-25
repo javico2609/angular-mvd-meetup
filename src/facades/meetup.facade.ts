@@ -1,10 +1,11 @@
-import { Meetup, Group } from '../redux-states/reducers/meetup';
+import { Meetup, MeetupGroup } from '../redux-states/reducers/meetup';
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import * as fromRoot from './../redux-states/reducers';
 import * as meetup from './../redux-states/actions/meetup';
 import { getState } from './../redux-states/util';
+import { getMeetupsBySearchTerm, getGroupBySearchTerm } from './../redux-states/selectors';
 
 @Injectable()
 export class MeetupFacade {
@@ -36,15 +37,19 @@ export class MeetupFacade {
     }
 
     getMeetups(): Observable<Meetup[]> {
-        return this.store.select(s => s.meetup.meetups);
+        return this.store.select(getMeetupsBySearchTerm);
     }
 
-    getGroups(): Observable<Group[]> {
-        return this.store.select(s => s.meetup.groups);
+    getGroups(): Observable<MeetupGroup[]> {
+        return this.store.select(getGroupBySearchTerm);
     }
 
     getViewSeleted(): Observable<string> {
         return this.store.select(s => s.meetup.viewGroupOrMeetupSelected);
+    }
+
+    getSearchTerm(): Observable<string> {
+        return this.store.select(s => s.meetup.searchTerm);
     }
 
     updateSelectedView(newView: string) {
@@ -56,5 +61,9 @@ export class MeetupFacade {
         }
 
         this.loadMeetups();
+    }
+
+    filterEventsOrGroup(searchText) {
+        this.store.dispatch(new meetup.UpdateSearchTermAction(searchText));
     }
 }
