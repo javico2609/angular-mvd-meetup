@@ -1,9 +1,9 @@
 
-import { FilterTopicsPage } from './filter-topics';
 import { Observable } from 'rxjs/Rx';
 import { Component, OnDestroy } from '@angular/core';
-import { NavController, NavParams, PopoverController, IonicPage } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 import { MeetupFacade } from './../../facades';
+import { MeetupConstants } from "../../constans/meetup";
 
 @IonicPage()
 @Component({
@@ -12,16 +12,13 @@ import { MeetupFacade } from './../../facades';
 })
 export class HomePage implements OnDestroy {
   view$: Observable<string>;
-  view: string = 'meetups';
+  view: string = MeetupConstants.MEETUP_EVENTS;
   searchTerm$: Observable<string>;
   selectedTopics$: Observable<string[]>;
   meetups$: Observable<any>;
   groups$: Observable<any>;
 
-  constructor(
-    private meetupFacade: MeetupFacade,
-    private popoverCtrl: PopoverController
-  ) { }
+  constructor(public meetupFacade: MeetupFacade) { }
 
   ionViewDidLoad() {
     this.selectedTopics$ = this.meetupFacade.getTopics();
@@ -32,17 +29,13 @@ export class HomePage implements OnDestroy {
     this.loadData();
   }
 
-  filterPopup(ev) {
-    let popover = this.popoverCtrl.create(FilterTopicsPage).present({ ev: ev });
-  }
-
   changeView(view) {
     this.view = view;
     this.meetupFacade.updateSelectedView(view);
   }
 
   isMeetupEvent() {
-    return this.view === 'meetups';
+    return this.view === MeetupConstants.MEETUP_EVENTS;
   }
 
   loadData() {
@@ -58,7 +51,9 @@ export class HomePage implements OnDestroy {
     this.meetupFacade.filterEventsOrGroup(searchText);
   }
 
-  ngOnDestroy() {
-
+  deleteTopic(topic) {
+    this.meetupFacade.deleteTopic(topic);
   }
+
+  ngOnDestroy() { }
 }

@@ -2,7 +2,7 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { BrowserModule } from '@angular/platform-browser';
-import { SERVICES_PROVIDERS, PAGES_PROVIDERS, NATIVES_PROVIDERS } from '../providers/providers';
+import { SERVICES_PROVIDERS, NATIVES_PROVIDERS } from '../providers/providers';
 import { IonicStarterApp } from './app.component';
 
 import { StoreModule } from '@ngrx/store';
@@ -13,8 +13,7 @@ import { AppEffectModules } from '../redux-states/effects';
 
 @NgModule({
   declarations: [
-    IonicStarterApp,
-    PAGES_PROVIDERS
+    IonicStarterApp
   ],
   imports: [
     BrowserModule,
@@ -52,8 +51,7 @@ import { AppEffectModules } from '../redux-states/effects';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    IonicStarterApp,
-    PAGES_PROVIDERS
+    IonicStarterApp
   ],
   providers: [...SERVICES_PROVIDERS, NATIVES_PROVIDERS]
 })

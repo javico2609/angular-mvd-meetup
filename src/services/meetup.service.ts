@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Jsonp, RequestOptions, URLSearchParams } from '@angular/http';
+import { Http, Jsonp, RequestOptions, URLSearchParams } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -64,8 +64,7 @@ export class MeetupService {
             category: this.CATEGORIES.TECH,
         }
 
-        let endpoint = "find/groups"
-        let cacheKey = endpoint + JSON.stringify(params);
+        let endpoint = "find/groups";
         return this.get(this.baseUrlV1 + endpoint, params);
     }
 

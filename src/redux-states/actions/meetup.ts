@@ -16,8 +16,21 @@ export const ActionTypes = {
 
     UPDATE_SHOW_VIEW: type('[VIEW] Update view selected on home page'),
 
-    UPDATE_SEARCH_TERM: type('[VIEW] Update search term')
+    UPDATE_SEARCH_TERM: type('[VIEW] Update search term'),
+
+    UPDATE_FILTER_TOPIC: type('[VIEW] Update filter topics'),
+    REMOVE_FILTER_TOPIC: type('[VIEW] Remove filter topics')
 };
+
+export class UpdateFilterTopicAction implements Action {
+    type = ActionTypes.UPDATE_FILTER_TOPIC;
+    constructor(public payload: any = {}) { }
+}
+
+export class RemoveFilterTopicAction implements Action {
+    type = ActionTypes.REMOVE_FILTER_TOPIC;
+    constructor(public payload: any = {}) { }
+}
 
 export class UpdateSearchTermAction implements Action {
     type = ActionTypes.UPDATE_SEARCH_TERM;
@@ -90,4 +103,5 @@ export type Actions =
     UpdateSelectedViewAction |
     LoadGroupsAction |
     LoadGroupsCompleteAction |
-    LoadGroupsFailAction;
+    LoadGroupsFailAction |
+    UpdateFilterTopicAction;

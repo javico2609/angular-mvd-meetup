@@ -1,6 +1,7 @@
 import * as meetup from '../actions/meetup';
 import { tassign } from 'tassign';
 import * as _ from 'lodash';
+import { MeetupConstants } from "../../constans/meetup";
 
 
 export interface Photo {
@@ -132,7 +133,7 @@ const initialState: State = {
     selectedTopics: [],
     meetups: [],
     groups: [],
-    viewGroupOrMeetupSelected: 'meetups',
+    viewGroupOrMeetupSelected: MeetupConstants.MEETUP_EVENTS,
     searchTerm: ''
 };
 
@@ -158,6 +159,12 @@ export function reducer(state = initialState, action: meetup.Actions): State {
 
         case meetup.ActionTypes.UPDATE_SEARCH_TERM:
             return tassign(state, { searchTerm: action.payload });
+
+        case meetup.ActionTypes.UPDATE_FILTER_TOPIC:
+            return tassign(state, { selectedTopics: action.payload });
+
+        case meetup.ActionTypes.REMOVE_FILTER_TOPIC:
+            return tassign(state, { selectedTopics: state.selectedTopics.filter( topic => topic !== action.payload ) });
 
         default:
             return state;

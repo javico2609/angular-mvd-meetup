@@ -1,5 +1,10 @@
 <ion-header>
-  <meetup-navbar (changeView)="changeView($event)" [view]="view$ | async" (onFilter)="filter($event)"></meetup-navbar>
+    <meetup-navbar 
+        (changeView)="changeView($event)" 
+        [view]="view$ | async" (onFilter)="filter($event)" 
+        (onFilterTopic)="meetupFacade.updateTopics($event)"
+        [selectedTopics]="selectedTopics$ | async">
+    </meetup-navbar>
 </ion-header>
 
 <ion-content class="primary-font">
