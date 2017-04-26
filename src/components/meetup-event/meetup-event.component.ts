@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 })
 export class MeetupEventComponent implements OnInit {
   @Input() meetups;
+  @Output() onSelect: EventEmitter<string> = new EventEmitter();
 
   constructor() { }
 
@@ -24,4 +25,7 @@ export class MeetupEventComponent implements OnInit {
     return null;
   }
 
+  selectEvent(meetup) {
+    this.onSelect.emit(meetup);
+  }
 }

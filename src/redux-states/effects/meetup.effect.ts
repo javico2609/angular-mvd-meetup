@@ -27,8 +27,9 @@ export class MeetupEffects {
             meetup.ActionTypes.UPDATE_SHOW_VIEW
         )
         .withLatestFrom(this.store$)
-        .filter((union: [Action, fromRoot.State]) => union[1].meetup.viewGroupOrMeetupSelected === MeetupConstants.MEETUP_EVENTS)
-        .map(([action, state]) =>
+        // Array destructuring... en TypeScript feature
+        .filter(([action, state]: [Action, fromRoot.State]) => state.meetup.viewGroupOrMeetupSelected === MeetupConstants.MEETUP_EVENTS)
+        .map(([action, state]: [Action, fromRoot.State]) =>
             ({
                 topics: state.meetup.selectedTopics.join(' '),
                 latitude: state.meetup.coordinates.latitude,
@@ -48,7 +49,8 @@ export class MeetupEffects {
             meetup.ActionTypes.UPDATE_SHOW_VIEW
         )
         .withLatestFrom(this.store$)
-        .filter((union: [Action, fromRoot.State]) => union[1].meetup.viewGroupOrMeetupSelected === MeetupConstants.MEETUP_GROUPS)
+        // Array destructuring... en TypeScript feature
+        .filter(([action, state]: [Action, fromRoot.State]) => state.meetup.viewGroupOrMeetupSelected === MeetupConstants.MEETUP_GROUPS)
         .map(([action, state]) =>
             ({
                 topics: state.meetup.selectedTopics,

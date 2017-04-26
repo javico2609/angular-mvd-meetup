@@ -1,9 +1,9 @@
-
 import { Observable } from 'rxjs/Rx';
 import { Component, OnDestroy } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { MeetupFacade } from './../../facades';
 import { MeetupConstants } from "../../constans/meetup";
+import { MeetupEventDetailPage } from "../meetup-event-detail/meetup-event-detail";
 
 @IonicPage()
 @Component({
@@ -18,7 +18,7 @@ export class HomePage implements OnDestroy {
   meetups$: Observable<any>;
   groups$: Observable<any>;
 
-  constructor(public meetupFacade: MeetupFacade) { }
+  constructor(public meetupFacade: MeetupFacade, private navCtrl: NavController) { }
 
   ionViewDidLoad() {
     this.selectedTopics$ = this.meetupFacade.getTopics();
@@ -53,6 +53,10 @@ export class HomePage implements OnDestroy {
 
   deleteTopic(topic) {
     this.meetupFacade.deleteTopic(topic);
+  }
+
+  goToMeetup(meetup) {
+    this.navCtrl.push(MeetupEventDetailPage,meetup);
   }
 
   ngOnDestroy() { }

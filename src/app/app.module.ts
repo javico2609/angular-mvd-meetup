@@ -19,7 +19,9 @@ import { AppEffectModules } from '../redux-states/effects';
     BrowserModule,
     HttpModule,
     JsonpModule,
-    IonicModule.forRoot(IonicStarterApp),
+    IonicModule.forRoot(IonicStarterApp, {
+      preloadModules: true
+    }),
     /**
      * StoreModule.provideStore is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of

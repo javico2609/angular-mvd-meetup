@@ -24,7 +24,7 @@
 
   </ion-list>-->
 
-<button ion-item *ngFor="let event of meetups">
+<button ion-item *ngFor="let event of meetups" (click)="selectEvent(event)">
   <small item-left>{{ event.time | date:"jm" }}</small>
   <h2 class="event-group">{{ event.group.name }}</h2>
   <p text-wrap text-justify class="event-name">{{ event.name }}</p>    

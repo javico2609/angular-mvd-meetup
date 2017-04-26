@@ -23,7 +23,7 @@
     </ion-chip>
   </div>
 
-  <meetup-event *ngIf="isMeetupEvent()" [meetups]="meetups$ | async"></meetup-event>
+  <meetup-event *ngIf="isMeetupEvent()" [meetups]="meetups$ | async" (onSelect)="goToMeetup($event)"></meetup-event>
   <meetup-group *ngIf="!isMeetupEvent()" [groups]="groups$ | async" [searchTerm]="searchTerm$ | async"></meetup-group>
 
 </ion-content>
