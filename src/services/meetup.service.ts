@@ -80,4 +80,14 @@ export class MeetupService {
 
         return Observable.forkJoin(requests).flatMap((result: any) => result.map(meetup => meetup.data));
     }
+
+    getMeetupHosts(meetupUrl, eventId): any {
+        let endpoint = `${meetupUrl}/events/${eventId}/hosts`;
+        return this.get(this.baseUrlV1 + endpoint, null, false);
+    }
+
+    getMeetupComments(meetupUrl, eventId): any {
+        let endpoint = `${meetupUrl}/events/${eventId}/comments`;
+        return this.get(this.baseUrlV1 + endpoint, null, false);
+    }
 }

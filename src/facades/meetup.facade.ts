@@ -1,4 +1,4 @@
-import { Meetup, MeetupGroup } from '../redux-states/reducers/meetup';
+import { Comments, Host, Meetup, MeetupGroup } from './../redux-states/reducers/models';
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
@@ -19,6 +19,10 @@ export class MeetupFacade {
         this.store.dispatch(new meetup.LoadGroupsAction());
     }
 
+    loadMeetupDetails(meetupSelected: Meetup) {
+        this.store.dispatch(new meetup.LoadMeetupDetailsAction(meetupSelected));
+    }
+
     getTopics(): Observable<string[]> {
         return this.store.select(s => s.meetup.selectedTopics);
     }
@@ -37,6 +41,14 @@ export class MeetupFacade {
 
     getGroups(): Observable<MeetupGroup[]> {
         return this.store.select(getGroupBySearchTerm);
+    }
+
+    getHosts(): Observable<Host[]> {
+        return this.store.select(s => s.meetup.hosts);
+    }
+
+    getComments(): Observable<Comments[]> {
+        return this.store.select(s => s.meetup.comments);
     }
 
     getViewSeleted(): Observable<string> {

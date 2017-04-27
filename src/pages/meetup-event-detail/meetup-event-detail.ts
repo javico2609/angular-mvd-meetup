@@ -1,5 +1,7 @@
+import { Observable } from 'rxjs/Rx';
 import { Component, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { MeetupFacade } from "../../facades/index";
 
 declare var google: any;
 
@@ -13,19 +15,22 @@ export class MeetupEventDetailPage {
 
   map: any;
   meetup: any;
-  hosts: any = [];
-  comments: any = [];
+  hosts$: Observable<any>;
+  comments$: Observable<any>;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public zone: NgZone, public platform: Platform
+    public zone: NgZone, public platform: Platform,
+    public meetupFacade: MeetupFacade
   ) {
     this.meetup = navParams.data;
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MeetupEventDetailPage');
+    this.hosts$ = this.meetupFacade.getHosts();
+    this.comments$ = this.meetupFacade.getComments();
+    this.meetupFacade.loadMeetupDetails(this.meetup);
   }
 
   ngAfterViewInit() {
@@ -52,7 +57,7 @@ export class MeetupEventDetailPage {
 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
       let lat, lon;
-      
+
       if (this.meetup.venue) {
         lat = this.meetup.venue.lat;
         lon = this.meetup.venue.lon;

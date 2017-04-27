@@ -19,7 +19,15 @@ export const ActionTypes = {
     UPDATE_SEARCH_TERM: type('[VIEW] Update search term'),
 
     UPDATE_FILTER_TOPIC: type('[VIEW] Update filter topics'),
-    REMOVE_FILTER_TOPIC: type('[VIEW] Remove filter topics')
+    REMOVE_FILTER_TOPIC: type('[VIEW] Remove filter topics'),
+
+    LOAD_MEETUP_DETAILS: type('[Meetup] Load Meetup Details'),
+    LOAD_MEETUP_DETAILS_FAIL: type('[Meetup] Load Meetup Details FAIL'),
+
+    LOAD_INIT_HOSTS_COMPLETE: type('[Meetup] Load Hosts COMPLETE'),
+
+    LOAD_INIT_COMMENTS_COMPLETE: type('[Meetup] Load Comments COMPLETE'),
+    
 };
 
 export class UpdateFilterTopicAction implements Action {
@@ -93,6 +101,29 @@ export class LoadMeetupsFailAction implements Action {
     constructor(public payload: any) { }
 }
 
+export class LoadMeetupDetailsAction implements Action {
+    type = ActionTypes.LOAD_MEETUP_DETAILS;
+    constructor(public payload: any = {}) { }
+}
+
+export class LoadHostsCompleteAction implements Action {
+    type = ActionTypes.LOAD_INIT_HOSTS_COMPLETE;
+
+    constructor(public payload: any) { }
+}
+
+export class LoadCommentsCompleteAction implements Action {
+    type = ActionTypes.LOAD_INIT_COMMENTS_COMPLETE;
+
+    constructor(public payload: any) { }
+}
+
+export class LoadMeetupDetailsFailAction implements Action {
+    type = ActionTypes.LOAD_MEETUP_DETAILS_FAIL;
+
+    constructor(public payload: any) { }
+}
+
 export type Actions =
     LoadInitGeolocationAction |
     LoadInitGeolocationCompleteAction |
@@ -104,4 +135,8 @@ export type Actions =
     LoadGroupsAction |
     LoadGroupsCompleteAction |
     LoadGroupsFailAction |
-    UpdateFilterTopicAction;
+    UpdateFilterTopicAction |
+    LoadMeetupDetailsAction |
+    LoadHostsCompleteAction |
+    LoadCommentsCompleteAction |
+    LoadMeetupDetailsFailAction;

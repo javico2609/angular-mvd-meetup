@@ -1,4 +1,4 @@
-# Meetup MVD Montevideo
+# MeetupApp - Meetup Angular MVD Montevideo
 
 Ionic 3, ngrx\store and the Meetup API 
 
