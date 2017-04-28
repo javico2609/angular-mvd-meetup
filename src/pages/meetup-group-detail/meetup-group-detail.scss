@@ -1,0 +1,41 @@
+page-meetup-group-detail {
+  .toolbar .toolbar-background {
+    border-bottom: none;
+  }
+
+  ion-content .scroll-content, ion-content .fixed-content {
+    border-bottom: 1px solid transparent;
+  }
+  .toolbar {
+    button {
+      padding-left: 20px;
+    }
+    .toolbar-background {
+      &.toolbar-background-ios, .toolbar-background-md {
+        border-bottom: none;
+      }
+    }
+  }
+
+  .detail-padding {
+    padding: 30px;
+  }
+  ion-card {
+    &.card-md, &.card-ios {
+      border-radius: 5px;
+      margin:10px 0;
+      width: calc(100%);
+      box-shadow: none;
+    
+      .card-header{
+        &.card-header-md, &.card-header-ios {
+          padding: 20px 16px 5px 16px !important;
+        }
+      }
+    }
+  }
+  .swiper-pagination-bullet {
+    width: 5px;
+    height: 5px;
+  }
+}

@@ -3,7 +3,6 @@ import { Component, OnDestroy } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { MeetupFacade } from './../../facades';
 import { MeetupConstants } from "../../constans/meetup";
-import { MeetupEventDetailPage } from "../meetup-event-detail/meetup-event-detail";
 
 @IonicPage()
 @Component({
@@ -56,7 +55,11 @@ export class HomePage implements OnDestroy {
   }
 
   goToMeetup(meetup) {
-    this.navCtrl.push(MeetupEventDetailPage,meetup);
+    this.navCtrl.push('MeetupEventDetailPage', meetup);
+  }
+
+  goToGroup(group) {
+    this.navCtrl.push('MeetupGroupDetailPage', group);
   }
 
   ngOnDestroy() { }

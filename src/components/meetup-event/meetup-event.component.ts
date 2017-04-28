@@ -8,7 +8,7 @@ import { DatePipe } from '@angular/common';
 })
 export class MeetupEventComponent implements OnInit {
   @Input() meetups;
-  @Output() onSelect: EventEmitter<string> = new EventEmitter();
+  @Output() onSelect: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 

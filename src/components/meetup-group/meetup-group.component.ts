@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'meetup-group',
@@ -8,10 +8,15 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 export class MeetupGroupComponent implements OnInit {
   @Input() groups;
   @Input() searchTerm;
+  @Output() onSelect: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  selectGroup(group) {
+    this.onSelect.emit(group);
   }
 
 }

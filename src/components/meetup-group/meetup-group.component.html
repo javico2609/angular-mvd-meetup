@@ -1,4 +1,4 @@
-<ion-card *ngFor="let group of groups">
+<ion-card *ngFor="let group of groups" (click)="selectGroup(group)">
   <ion-item>
     <ion-avatar item-left>
       <img *ngIf="group.organizer.photo" [src]="group.organizer.photo.thumb_link"/>
