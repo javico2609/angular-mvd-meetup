@@ -1,7 +1,7 @@
 import { ErrorHandler } from '@angular/core';
 import { IonicErrorHandler } from 'ionic-angular';
 import { LayoutFacade, MeetupFacade } from './../facades';
-import { SettingsService, MeetupService } from './../services';
+import { SettingsService, MeetupService, LoadingService } from './../services';
 import { CacheService } from "ionic-cache/ionic-cache";
 
 export const SERVICES_PROVIDERS = [
@@ -10,6 +10,7 @@ export const SERVICES_PROVIDERS = [
     LayoutFacade,
     SettingsService,
     MeetupService,
-    MeetupFacade
+    MeetupFacade,
+    LoadingService
 ];
 

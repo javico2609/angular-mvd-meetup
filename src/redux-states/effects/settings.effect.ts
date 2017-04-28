@@ -33,14 +33,6 @@ export class SettingsEffects {
             .catch(error => Observable.of(new layout.LoadInitConfigurationFailAction({ error })))
         );
 
-    @Effect() loadInitConfig$ = this.actions$
-        .ofType(layout.ActionTypes.LOAD_INIT_CONFIGURATION)
-        .map<Action, void>(toPayload)
-        .switchMap(() => this.settingsService.loadInitConfiguration()
-            .map(settings => new layout.LoadInitConfigurationCompleteAction(settings))
-            .catch(error => Observable.of(new layout.LoadInitConfigurationFailAction({ error })))
-        );
-
     @Effect() updateTheme$ = this.actions$
         .ofType(layout.ActionTypes.UPDATE_THEME)
         .map<Action, { theme: string }>(toPayload)
