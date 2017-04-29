@@ -27,8 +27,28 @@ export const ActionTypes = {
     LOAD_INIT_HOSTS_COMPLETE: type('[Meetup] Load Hosts COMPLETE'),
 
     LOAD_INIT_COMMENTS_COMPLETE: type('[Meetup] Load Comments COMPLETE'),
-    
+
+    SELECT_MEETUP_GROUP: type('[Meetup] SELECT MEETUP GROUP COMPLETE'),
+
+    LOAD_MEMBERS_GROUP_COMPLETE: type('[Meetup] Load Members Group COMPLETE'),
+    LOAD_MEMBERS_GROUP_FAIL: type('[Meetup] Load Members Group FAIL'),
+
+    LOAD_MEMBER_DETAILS: type('[Meetup] Load Members Details'),
+    LOAD_MEMBER_DETAILS_COMPLETE: type('[Meetup] Load Members Details COMPLETE'),
+    LOAD_MEMBER_DETAILS_FAIL: type('[Meetup] Load Members Details FAIL')
 };
+
+export class LoadMembersGroupCompleteAction implements Action {
+    type = ActionTypes.LOAD_MEMBERS_GROUP_COMPLETE;
+
+    constructor(public payload: any) { }
+}
+
+export class LoadMembersGroupFailAction implements Action {
+    type = ActionTypes.LOAD_MEMBERS_GROUP_FAIL;
+
+    constructor(public payload: any) { }
+}
 
 export class UpdateFilterTopicAction implements Action {
     type = ActionTypes.UPDATE_FILTER_TOPIC;
@@ -124,6 +144,29 @@ export class LoadMeetupDetailsFailAction implements Action {
     constructor(public payload: any) { }
 }
 
+export class UpdateSelectedGroupAction implements Action {
+    type = ActionTypes.SELECT_MEETUP_GROUP;
+
+    constructor(public payload: any) { }
+}
+
+export class LoadMemberDetailsAction implements Action {
+    type = ActionTypes.LOAD_MEMBER_DETAILS;
+    constructor(public payload: any = {}) { }
+}
+
+export class LoadMemberDetailsCompleteAction implements Action {
+    type = ActionTypes.LOAD_MEMBER_DETAILS_COMPLETE;
+
+    constructor(public payload: any) { }
+}
+
+export class LoadMemberDetailsFailAction implements Action {
+    type = ActionTypes.LOAD_MEMBER_DETAILS_FAIL;
+
+    constructor(public payload: any) { }
+}
+
 export type Actions =
     LoadInitGeolocationAction |
     LoadInitGeolocationCompleteAction |
@@ -139,4 +182,10 @@ export type Actions =
     LoadMeetupDetailsAction |
     LoadHostsCompleteAction |
     LoadCommentsCompleteAction |
-    LoadMeetupDetailsFailAction;
+    LoadMeetupDetailsFailAction |
+    UpdateSelectedGroupAction |
+    LoadMembersGroupCompleteAction |
+    LoadMembersGroupFailAction |
+    LoadMemberDetailsAction |
+    LoadMemberDetailsCompleteAction |
+    LoadMemberDetailsFailAction;

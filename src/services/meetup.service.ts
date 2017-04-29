@@ -90,4 +90,17 @@ export class MeetupService {
         let endpoint = `${meetupUrl}/events/${eventId}/comments`;
         return this.get(this.baseUrlV1 + endpoint, null, false);
     }
+
+    getGroupMembers(group) {
+        let params = {
+            'group_id': group.id,
+            'group_urlname': group.urlname
+        }
+        return this.get(this.baseUrlV2 + 'members', params);
+    }
+
+    getMemberDetails(memberId) {
+        let endpoint = `member/${memberId}`;
+        return this.get(this.baseUrlV2 + endpoint, null, false);
+    }
 }

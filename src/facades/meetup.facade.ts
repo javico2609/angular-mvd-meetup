@@ -66,4 +66,20 @@ export class MeetupFacade {
     filterEventsOrGroup(searchText) {
         this.store.dispatch(new meetup.UpdateSearchTermAction(searchText));
     }
+
+    selectGroup(group) {
+        this.store.dispatch(new meetup.UpdateSelectedGroupAction(group));
+    }
+
+    getSelectGroup() {
+        return this.store.select(s => s.meetup.selectedGroup);
+    }
+
+    loadMemberDetails(member) {
+        this.store.dispatch(new meetup.LoadMemberDetailsAction(member.id));
+    }
+
+    getSelectedMember() {
+        return this.store.select(s => s.meetup.selectedMember);
+    }
 }

@@ -1,5 +1,7 @@
+import { Observable } from 'rxjs/Rx';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
+import { MeetupFacade } from './../../facades';
 
 @IonicPage()
 @Component({
@@ -7,16 +9,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'meetup-group-detail.html',
 })
 export class MeetupGroupDetailPage {
-  group: any = {};
-  members: any = [];
-  meetups: any = [];
+  group$: Observable<any>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.group = navParams.data;
-  }
+  constructor(public navCtrl: NavController, public meetupFacade: MeetupFacade) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MeetupGroupDetailPage');
+    this.group$ = this.meetupFacade.getSelectGroup();
+  }
+
+  seeMemberDetails(host) {
+    this.navCtrl.push('MemberDetailPage', host);
   }
 
 }

@@ -77,4 +77,8 @@ export class MeetupEventDetailPage {
       this.map.setCenter(new google.maps.Marker(markerData).getPosition());
     });
   }
+
+  seeMemberDetails(host) {
+    this.navCtrl.push('MemberDetailPage', host);
+  }
 }

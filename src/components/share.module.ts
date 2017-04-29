@@ -7,6 +7,8 @@ import { MeetupGroupComponent } from './meetup-group/meetup-group.component';
 import { IonicModule } from 'ionic-angular';
 import { MeetupEventComponent } from './meetup-event/meetup-event.component';
 import { MeetupNavbarComponent } from './meetup-navbar/meetup-navbar.component';
+import { MeetupGroupDetailComponent } from './meetup-group-detail/meetup-group-detail.component';
+import { MemberDetailComponent } from './member-detail/member-detail.component';
 
 @NgModule({
   imports: [CommonModule, IonicModule],
@@ -15,14 +17,18 @@ import { MeetupNavbarComponent } from './meetup-navbar/meetup-navbar.component';
     HighlightPipe,
     MeetupGroupComponent,
     MeetupEventComponent,
-    MeetupNavbarComponent
-  ],
+    MeetupNavbarComponent,
+    MeetupGroupDetailComponent,
+    MemberDetailComponent
+],
   exports: [
     MeetupGroupComponent,
     MeetupEventComponent,
     DistancePipe,
     HighlightPipe,
-    MeetupNavbarComponent
+    MeetupNavbarComponent,
+    MeetupGroupDetailComponent,
+    MemberDetailComponent
   ],
   providers: []
 })

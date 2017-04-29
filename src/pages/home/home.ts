@@ -59,7 +59,7 @@ export class HomePage implements OnDestroy {
   }
 
   goToGroup(group) {
-    this.navCtrl.push('MeetupGroupDetailPage', group);
+    this.navCtrl.push('MeetupGroupDetailPage').then( () => this.meetupFacade.selectGroup(group) );
   }
 
   ngOnDestroy() { }

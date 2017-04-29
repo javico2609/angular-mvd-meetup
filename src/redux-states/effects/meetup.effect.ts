@@ -1,4 +1,4 @@
-import { Meetup } from '../reducers/models';
+import { Meetup, MeetupGroup } from '../reducers/models';
 import { Injectable } from '@angular/core';
 import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
@@ -23,10 +23,10 @@ export class MeetupEffects {
 
     @Effect() loadMeetups$ = this.actions$
         .ofType(
-            meetup.ActionTypes.LOAD_INIT_MEETUPS,
-            meetup.ActionTypes.UPDATE_FILTER_TOPIC,
-            meetup.ActionTypes.REMOVE_FILTER_TOPIC,
-            meetup.ActionTypes.UPDATE_SHOW_VIEW
+        meetup.ActionTypes.LOAD_INIT_MEETUPS,
+        meetup.ActionTypes.UPDATE_FILTER_TOPIC,
+        meetup.ActionTypes.REMOVE_FILTER_TOPIC,
+        meetup.ActionTypes.UPDATE_SHOW_VIEW
         )
         .withLatestFrom(this.store$)
         // Array destructuring... en TypeScript feature
@@ -47,10 +47,10 @@ export class MeetupEffects {
 
     @Effect() loadGroups$ = this.actions$
         .ofType(
-            meetup.ActionTypes.LOAD_INIT_GROUPS,
-            meetup.ActionTypes.UPDATE_FILTER_TOPIC,
-            meetup.ActionTypes.REMOVE_FILTER_TOPIC,
-            meetup.ActionTypes.UPDATE_SHOW_VIEW
+        meetup.ActionTypes.LOAD_INIT_GROUPS,
+        meetup.ActionTypes.UPDATE_FILTER_TOPIC,
+        meetup.ActionTypes.REMOVE_FILTER_TOPIC,
+        meetup.ActionTypes.UPDATE_SHOW_VIEW
         )
         .withLatestFrom(this.store$)
         // Array destructuring... en TypeScript feature
@@ -66,26 +66,10 @@ export class MeetupEffects {
         .switchMap((payload) => this.meetupService.getMeetupGroups(payload.topics, payload.latitude, payload.longitude)
             .map(payload => new meetup.LoadGroupsCompleteAction(payload))
             .catch(error => Observable.of(new meetup.LoadGroupsFailAction({ error })))
-        ) 
+        )
         .do(() => this.loadingService.dismiss());
 
-    // @Effect() loadHosts$ = this.actions$
-    //     .ofType(meetup.ActionTypes.LOAD_MEETUP_DETAILS)
-    //     .map<Action, Meetup>(toPayload)
-    //     .switchMap((meetupDetail: Meetup) => this.meetupService.getMeetupHosts(meetupDetail.group.urlname, meetupDetail.id)
-    //         .map(hosts => new meetup.LoadHostsCompleteAction(hosts))
-    //         .catch(error => Observable.of(new meetup.LoadHostsFailAction({ error })))
-    //     );
-
-    // @Effect() loadComments$ = this.actions$
-    //     .ofType(meetup.ActionTypes.LOAD_MEETUP_DETAILS)
-    //     .map<Action, Meetup>(toPayload)
-    //     .switchMap((meetupDetail: Meetup) => this.meetupService.getMeetupComments(meetupDetail.group.urlname, meetupDetail.id)
-    //         .map(hosts => new meetup.LoadCommentsCompleteAction(hosts))
-    //         .catch(error => Observable.of(new meetup.LoadCommentsFailAction({ error })))
-    //     );
-
-    @Effect() loadFrameworkCommonRequest$ = this.actions$
+    @Effect() loadMeetupDetails$ = this.actions$
         .ofType(meetup.ActionTypes.LOAD_MEETUP_DETAILS)
         .do(() => this.loadingService.present())
         .map<Action, Meetup>(toPayload)
@@ -100,6 +84,27 @@ export class MeetupEffects {
                 ];
             })
             .catch(error => Observable.of(new meetup.LoadMeetupDetailsFailAction({ error })))
+        )
+        .do(() => this.loadingService.dismiss());
+
+
+    @Effect() loadGroupMembers$ = this.actions$
+        .ofType(meetup.ActionTypes.SELECT_MEETUP_GROUP)
+        .do(() => this.loadingService.present())
+        .map<Action, MeetupGroup>(toPayload)
+        .switchMap((meetupGroup: MeetupGroup) => this.meetupService.getGroupMembers(meetupGroup)
+            .map(members => new meetup.LoadMembersGroupCompleteAction(members.results))
+            .catch(error => Observable.of(new meetup.LoadMembersGroupFailAction({ error })))
+        )
+        .do(() => this.loadingService.dismiss());
+
+    @Effect() loadMemberDetails$ = this.actions$
+        .ofType(meetup.ActionTypes.LOAD_MEMBER_DETAILS)
+        .do(() => this.loadingService.present())
+        .map<Action, number>(toPayload)
+        .switchMap((memberId: number) => this.meetupService.getMemberDetails(memberId)
+            .map(memberDetail => new meetup.LoadMemberDetailsCompleteAction(memberDetail))
+            .catch(error => Observable.of(new meetup.LoadMemberDetailsFailAction({ error })))
         )
         .do(() => this.loadingService.dismiss());
 }

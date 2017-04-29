@@ -1,0 +1,31 @@
+<div *ngIf="group">
+  <div style="text-align: center">
+    <img style="height:35vh" [src]="group.group_photo?.photo_link"  onerror="this.src='../assets/img/profile.jpg'">
+  </div>
+  <h2>{{ group.name }}</h2>
+  <p>{{ group.city }} - {{ group.localized_country_name }}</p>
+  <small class="wrap-bag"> Created on {{ group.created | date }} </small>
+  <div [innerHTML]="group.description"></div>
+
+  <h3>Category: {{ group.category?.name }}</h3>
+
+  <h3>Organizer:</h3>
+  <ion-card class="mt-hosts">
+    <ion-item (click)="seeMemberDetails(group.organizer)">
+      <ion-avatar item-left>
+        <img [src]="group.organizer.photo?.thumb_link"  onerror="this.src='../assets/img/profile.jpg'">
+      </ion-avatar>
+      <h2>{{ group.organizer.name }}</h2>
+    </ion-item>
+  </ion-card>
+
+  <h3>Members: <small>{{ group.members }}</small></h3>
+   <ion-card class="mt-hosts" *ngFor="let member of group.hosts" (click)="seeMemberDetails(member)">
+    <ion-item>
+      <ion-avatar item-left>
+        <img [src]="member.photo?.thumb_link" onerror="this.src='../assets/img/profile.jpg'">
+      </ion-avatar>
+      <h2>{{ member.name }}</h2>
+    </ion-item>
+  </ion-card>
+</div>

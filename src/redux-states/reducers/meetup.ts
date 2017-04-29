@@ -12,7 +12,9 @@ export interface State {
     groups: MeetupGroup[],
     hosts: Host[],
     comments: Comments[],
-    viewGroupOrMeetupSelected: string
+    viewGroupOrMeetupSelected: string,
+    selectedGroup: MeetupGroup,
+    selectedMember: Host
 }
 
 const initialState: State = {
@@ -23,7 +25,9 @@ const initialState: State = {
     hosts: [],
     comments: [],
     viewGroupOrMeetupSelected: MeetupConstants.MEETUP_EVENTS,
-    searchTerm: ''
+    searchTerm: '',
+    selectedGroup: null,
+    selectedMember: null
 };
 
 export function reducer(state = initialState, action: meetup.Actions): State {
@@ -60,6 +64,29 @@ export function reducer(state = initialState, action: meetup.Actions): State {
 
         case meetup.ActionTypes.LOAD_INIT_COMMENTS_COMPLETE:
             return tassign(state, { comments: action.payload });
+
+        case meetup.ActionTypes.SELECT_MEETUP_GROUP:
+            return tassign(state, { selectedGroup: action.payload });
+
+        case meetup.ActionTypes.LOAD_MEMBERS_GROUP_COMPLETE:
+            return tassign(state, { selectedGroup: tassign(state.selectedGroup, { hosts: action.payload }) });
+
+        case meetup.ActionTypes.LOAD_MEMBER_DETAILS_COMPLETE: {
+            let social: { provider: string, profile: string }[] = [];
+
+            for (var key in action.payload.other_services) {
+                if (action.payload.other_services.hasOwnProperty(key)) {
+                    let socialInfo = {
+                        provider: key,
+                        profile: action.payload.other_services[key].identifier
+                    }
+
+                    social.push(socialInfo);
+                }
+            }
+
+            return tassign(state, { selectedMember: tassign(action.payload, { social: social }) })
+        }
 
         default:
             return state;

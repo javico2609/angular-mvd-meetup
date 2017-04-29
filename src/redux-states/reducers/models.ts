@@ -63,6 +63,7 @@ export interface MeetupGroup {
     key_photo: KeyPhoto;
     timezone: string;
     category: Category;
+    hosts: Host[]
 }
 
 export interface Coordinates {
@@ -138,6 +139,7 @@ export interface Host {
     lon: number;
     photo: Photo;
     group_profile: GroupProfile;
+    social: { provider: string, profile: string }[]
 }
 
 export interface EventContext {

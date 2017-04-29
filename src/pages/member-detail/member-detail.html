@@ -1,0 +1,8 @@
+<ion-header class="primary-font">
+  <ion-navbar>
+    <ion-title>{{(member$ | async)?.name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content fullscreen padding class="primary-font">
+  <member-detail [member]="member$ | async"></member-detail>
+</ion-content>
