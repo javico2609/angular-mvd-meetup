@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Rx';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavParams } from 'ionic-angular';
 import { MeetupFacade } from "../../facades";
 
 @IonicPage()

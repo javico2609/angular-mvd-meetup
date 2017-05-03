@@ -1,5 +1,13 @@
 page-home {
 
+  [item-left] {
+    ion-icon {
+      font-size: 2em;
+      padding-left: 30%;
+      margin-bottom: 5px;
+    }
+  }
+
   ion-img {
      display: inline-block; 
      min-width: 20px; 

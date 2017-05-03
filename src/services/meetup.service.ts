@@ -43,7 +43,8 @@ export class MeetupService {
     getMeetups(topics, lat?, long?): Observable<any> {
         let params = {
             text: topics || '',
-            time: ',1w',
+            time: ',10w',
+            page: 100,
             category: this.CATEGORIES.TECH,
         }
 
@@ -72,7 +73,7 @@ export class MeetupService {
         let requests: Observable<any>[] = [];
 
         for (let topic in topics) {
-            requests.push(this.fetchMeetupGroup(topic, lat, long));
+            requests.push(this.fetchMeetupGroup(topics[topic], lat, long));
         }
 
         if (topics.length === 0)
@@ -94,7 +95,8 @@ export class MeetupService {
     getGroupMembers(group) {
         let params = {
             'group_id': group.id,
-            'group_urlname': group.urlname
+            'group_urlname': group.urlname,
+            'page': 20
         }
         return this.get(this.baseUrlV2 + 'members', params);
     }

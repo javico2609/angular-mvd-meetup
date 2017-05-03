@@ -15,7 +15,7 @@ export class MeetupNavbarComponent implements OnInit {
   @Output() onFilterTopic: EventEmitter<string[]> = new EventEmitter();
 
   queryText: string = '';
-  topics: string[] = ['Ionic', 'Angular', 'React', 'Vue', 'Aurelia', 'C#', 'Java', 'Big Data', 'Javascript'];
+  topics: string[] = ['Ionic', 'Angular', 'React', 'Vue', 'Aurelia', 'C#', 'Java', 'Big Data', 'Javascript', 'Ember', '.NET'];
 
   constructor(private alertCtrl: AlertController) { }
 

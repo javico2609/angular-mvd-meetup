@@ -24,20 +24,26 @@
 
   </ion-list>-->
 
-<button ion-item *ngFor="let event of meetups" (click)="selectEvent(event)">
-  <small item-left>{{ event.time | date:"jm" }}</small>
-  <h2 class="event-group">{{ event.group.name }}</h2>
-  <p text-wrap text-justify class="event-name">{{ event.name }}</p>    
-  <h6 text-justify class="secondary-font"><ion-icon name="pin"></ion-icon>   
-    <span *ngIf="!event.venue?.name">Undisclosed</span>
-    <span *ngIf="event.venue?.name">{{event.venue?.name}}</span>
-    <span *ngIf="!event.venue?.address_1"></span>
-    <span *ngIf="event.venue?.address_1"> , {{event.venue?.address_1}}</span>
-  </h6>
-  <h6 text-justify class="secondary-font"><ion-icon name="md-walk"></ion-icon>
-    <span> Distance: {{event.distance | distance}} </span>
-  </h6>
-  <h6 text-justify class="secondary-font">
-    <span>{{ event.yes_rsvp_count }} {{ event.group.who}} going</span>
-  </h6>
-</button>
+<ion-list>
+  <button ion-item *ngFor="let event of meetups" (click)="selectEvent(event)">
+    <small item-left>
+      <ion-icon name="ios-checkmark-circle" color="secondary"></ion-icon>
+      <p> {{ event.time | date }} </p>
+      <p> {{ event.time | date:"jm" }} </p>
+    </small>
+    <h2 class="event-group">{{ event.group.name }}</h2>
+    <p text-wrap text-justify class="event-name">{{ event.name }}</p>    
+    <h6 text-justify class="secondary-font"><ion-icon name="pin"></ion-icon>   
+      <span *ngIf="!event.venue?.name">Undisclosed</span>
+      <span *ngIf="event.venue?.name">{{event.venue?.name}}</span>
+      <span *ngIf="!event.venue?.address_1"></span>
+      <span *ngIf="event.venue?.address_1"> , {{event.venue?.address_1}}</span>
+    </h6>
+    <h6 text-justify class="secondary-font"><ion-icon name="md-walk"></ion-icon>
+      <span> Distance: {{event.distance | distance}} </span>
+    </h6>
+    <h6 text-justify class="secondary-font">
+      <span>{{ event.yes_rsvp_count }} {{ event.group.who}} going</span>
+    </h6>
+  </button>
+</ion-list>
