@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import * as _ from 'lodash';
+import { MeetupConstants } from "../../constans/meetup";
 
 @Component({
   selector: 'meetup-navbar',
@@ -19,7 +20,7 @@ export class MeetupNavbarComponent implements OnInit {
 
   constructor(private alertCtrl: AlertController) { }
 
-  ngOnInit() { }
+  ngOnInit() { this.view = this.view != null ? this.view : MeetupConstants.MEETUP_EVENTS }
 
   changeViewEvent() {
     this.changeView.emit(this.view);
